@@ -4,32 +4,49 @@ public class Drawer {
 
 
     // shall there be a limit on the dimensions of the canvas?
+    // what if height of 0 or 1 or 2 is entered?
     public void drawCanvas(String width, String height) {
 
         try
         {
-            for(int i = 0; i < Integer.parseInt(width); i++)
+            int frameWidth = Integer.parseInt(width) + 2;
+            int frameHeight = Integer.parseInt(height) + 2;
+
+            String canvas[][] = new String[frameHeight][frameWidth];
+
+            for(int i = 0; i < frameWidth; i++)
             {
-                System.out.print("-");
+                canvas[0][i] = "-";
             }
 
-            for(int i = 0; i < Integer.parseInt(height); i++)
+
+            for(int i = 1; i < (frameHeight - 1); i++)
             {
-                System.out.println();
-                System.out.print("|");
-                for(int j = 0; j < (Integer.parseInt(width) - 2); j++)
+                canvas[i][0] = "|";
+                for(int j = 1; j < (frameWidth - 1); j++)
                 {
-                    System.out.print(" ");
+                    canvas[i][j] = " ";
                 }
-                System.out.print("|");
+                canvas[i][frameWidth - 1] = "|";
             }
 
-            System.out.println();
-
-            for(int i = 0; i < Integer.parseInt(width); i++)
+            for(int i = 0; i < frameWidth; i++)
             {
-                System.out.print("-");
+                canvas[frameHeight - 1][i] = "-";
             }
+
+
+            // Print frame
+            // Will probably need to sit in a separate class/method since other methods will have to use this canvas as well
+            for(int i = 0; i < frameHeight; i++)
+            {
+                for(int j = 0; j < frameWidth; j++)
+                {
+                    System.out.print(canvas[i][j]);
+                }
+                System.out.println();
+            }
+
         }
         catch(NumberFormatException e)
         {
