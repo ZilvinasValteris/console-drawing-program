@@ -65,7 +65,12 @@ public class Drawer {
             if (x1Int == x2Int)
             {
                 // Vertical line
-
+                for (int i = y1Int; i <= y2Int; i++)
+                {
+                    drawing.remove((i * frameWidth) + x1Int);
+                    drawing.add((i * frameWidth) + x1Int, "x");
+                }
+                printDrawing();
             }
             else if (y1Int == y2Int)
             {
