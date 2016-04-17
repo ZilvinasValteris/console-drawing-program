@@ -14,7 +14,7 @@ public class Menu {
     {
         boolean isQuitting = false;
         Scanner inputScanner = new Scanner(System.in);
-        while(isQuitting == false){
+        while(!isQuitting){
 
 //        TODO: There should be some sort of menu/manual on how to use this program and what commands are available
             System.out.println("Enter command: ");
@@ -25,6 +25,10 @@ public class Menu {
 
             char command = commandAndOptionsEntered[0].charAt(0);
 
+            String x1;
+            String y1;
+            String x2;
+            String y2;
 //        char command = commandEntered.charAt(0); // should give the same result as the line above?
 
             // What should the behaviour be if something is already drawn at the coordinates specified?
@@ -36,6 +40,7 @@ public class Menu {
                         String width = commandAndOptionsEntered[1];
                         String height = commandAndOptionsEntered[2];
                         drawer.drawCanvas(width, height);
+                        drawer.printDrawing();
                     }
                     else if(commandAndOptionsEntered.length < 3)
                     {
@@ -49,15 +54,23 @@ public class Menu {
                     break;
                 case 'L':
                     // drawLine(x1, y1, x2, y2)
-                    String x1 = commandAndOptionsEntered[1];
-                    String y1 = commandAndOptionsEntered[2];
-                    String x2 = commandAndOptionsEntered[3];
-                    String y2 = commandAndOptionsEntered[4];
+                    x1 = commandAndOptionsEntered[1];
+                    y1 = commandAndOptionsEntered[2];
+                    x2 = commandAndOptionsEntered[3];
+                    y2 = commandAndOptionsEntered[4];
 
                     drawer.drawLine(x1, y1, x2, y2);
+                    drawer.printDrawing();
                     break;
                 case 'R':
                     // drawRectangle(x1, y1, x2, y2)
+                    x1 = commandAndOptionsEntered[1];
+                    y1 = commandAndOptionsEntered[2];
+                    x2 = commandAndOptionsEntered[3];
+                    y2 = commandAndOptionsEntered[4];
+
+                    drawer.drawRectangle(x1, y1, x2, y2);
+                    drawer.printDrawing();
                     break;
                 case 'B':
                     // fillArea(x, y, colour)

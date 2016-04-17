@@ -38,8 +38,6 @@ public class Drawer {
             {
                 drawing.add("-");
             }
-
-            printDrawing();
         }
         catch(NumberFormatException e)
         {
@@ -70,7 +68,6 @@ public class Drawer {
                     drawing.remove((i * frameWidth) + x1Int);
                     drawing.add((i * frameWidth) + x1Int, "x");
                 }
-                printDrawing();
             }
             else if (y1Int == y2Int)
             {
@@ -81,11 +78,10 @@ public class Drawer {
                     drawing.remove((y1Int * frameWidth) + i);
                     drawing.add((y1Int * frameWidth) + i, "x");
                 }
-                printDrawing();
             }
             else
             {
-                System.out.printf("Only straight lines can be drawn. Coordinates  %d %d %d %d would not yield a straight line.", x1Int, y1Int, x2Int, y2Int);
+                System.out.printf("Only straight lines can be drawn. Coordinates %d %d %d %d would not yield a straight line.", x1Int, y1Int, x2Int, y2Int);
                 System.out.println();
             }
 
@@ -94,12 +90,19 @@ public class Drawer {
         {
             System.out.println("Invalid input. Function arguments should only be natural numbers, e.g.: C 5 2");
         }
+    }
 
 
+    public void drawRectangle(String x1, String y1, String x2, String y2)
+    {
+        drawLine(x1, y1, x2, y1);
+        drawLine(x1, y2, x2, y2);
+        drawLine(x1, y1, x1, y2);
+        drawLine(x2, y1, x2, y2);
 
     }
 
-    private void printDrawing()
+    public void printDrawing()
     {
         for(int i = 0; i < frameHeight; i++)
             {
