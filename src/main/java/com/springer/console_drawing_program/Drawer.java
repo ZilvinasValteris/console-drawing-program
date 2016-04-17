@@ -19,24 +19,31 @@ public class Drawer {
             frameHeight = Integer.parseInt(height) + 2;
             drawing = new ArrayList<String>();
 
-            for(int i = 0; i < frameWidth; i++)
+            if(Integer.parseInt(width) < 1 || Integer.parseInt(height) < 1)
             {
-                drawing.add("-");
+                System.out.println("Canvas must have the length and the width of at least 1!");
             }
-
-            for(int i = 0; i < frameHeight - 2; i++)
+            else
             {
-                drawing.add("|");
-                for(int j = 0; j < frameWidth - 2; j++)
+                for(int i = 0; i < frameWidth; i++)
                 {
-                    drawing.add(" ");
+                    drawing.add("-");
                 }
-                drawing.add("|");
-            }
 
-            for(int i = 0; i < frameWidth; i++)
-            {
-                drawing.add("-");
+                for(int i = 0; i < frameHeight - 2; i++)
+                {
+                    drawing.add("|");
+                    for(int j = 0; j < frameWidth - 2; j++)
+                    {
+                        drawing.add(" ");
+                    }
+                    drawing.add("|");
+                }
+
+                for(int i = 0; i < frameWidth; i++)
+                {
+                    drawing.add("-");
+                }
             }
         }
         catch(NumberFormatException e)
@@ -102,9 +109,21 @@ public class Drawer {
 
     }
 
+    public void fillArea(String x, String y, String colour)
+    {
+
+    }
+
+
     public void printDrawing()
     {
-        for(int i = 0; i < frameHeight; i++)
+        if(drawing.isEmpty())
+        {
+            System.out.println("No canvas exists. You need to create a canvas first. Use the command: C width length");
+        }
+        else
+        {
+            for(int i = 0; i < frameHeight; i++)
             {
                 for(int j = 0; j < frameWidth; j++)
                 {
@@ -112,5 +131,7 @@ public class Drawer {
                 }
                 System.out.println();
             }
+        }
+
     }
 }

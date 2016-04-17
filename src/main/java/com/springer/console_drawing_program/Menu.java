@@ -32,6 +32,7 @@ public class Menu {
 //        char command = commandEntered.charAt(0); // should give the same result as the line above?
 
             // What should the behaviour be if something is already drawn at the coordinates specified?
+            // TODO: need to ensure that canvas is drawn before any other commands are used
             switch(command)
             {
                 case 'C':
@@ -53,27 +54,52 @@ public class Menu {
 
                     break;
                 case 'L':
-                    // drawLine(x1, y1, x2, y2)
-                    x1 = commandAndOptionsEntered[1];
-                    y1 = commandAndOptionsEntered[2];
-                    x2 = commandAndOptionsEntered[3];
-                    y2 = commandAndOptionsEntered[4];
+                    // TODO: ensure that the line is withing the bounds of the canvas before drawing it
+                    if(commandAndOptionsEntered.length == 5)
+                    {
+                        x1 = commandAndOptionsEntered[1];
+                        y1 = commandAndOptionsEntered[2];
+                        x2 = commandAndOptionsEntered[3];
+                        y2 = commandAndOptionsEntered[4];
 
-                    drawer.drawLine(x1, y1, x2, y2);
-                    drawer.printDrawing();
+                        drawer.drawLine(x1, y1, x2, y2);
+                        drawer.printDrawing();
+                    }
+                    else if(commandAndOptionsEntered.length < 5)
+                    {
+                        System.out.println("You need to enter coordinates x1 y1 x2 y2 to draw a line!");
+                    }
+                    else if(commandAndOptionsEntered.length > 5)
+                    {
+                        System.out.println("Too many parameters entered for command 'L'! Correct usage: L x1 y1 x2 y2");
+                    }
                     break;
                 case 'R':
-                    // drawRectangle(x1, y1, x2, y2)
-                    x1 = commandAndOptionsEntered[1];
-                    y1 = commandAndOptionsEntered[2];
-                    x2 = commandAndOptionsEntered[3];
-                    y2 = commandAndOptionsEntered[4];
+                    // TODO: need to check that the coordinates entered represent a rectangular
+                    if(commandAndOptionsEntered.length == 5) {
+                        x1 = commandAndOptionsEntered[1];
+                        y1 = commandAndOptionsEntered[2];
+                        x2 = commandAndOptionsEntered[3];
+                        y2 = commandAndOptionsEntered[4];
 
-                    drawer.drawRectangle(x1, y1, x2, y2);
-                    drawer.printDrawing();
+                        drawer.drawRectangle(x1, y1, x2, y2);
+                        drawer.printDrawing();
+                    }
+                    else if(commandAndOptionsEntered.length < 5)
+                    {
+                        System.out.println("You need to enter coordinates x1 y1 x2 y2 to draw a rectangle!");
+                    }
+                    else if(commandAndOptionsEntered.length > 5)
+                    {
+                        System.out.println("Too many parameters entered for command 'R'! Correct usage: R x1 y1 x2 y2");
+                    }
                     break;
                 case 'B':
-                    // fillArea(x, y, colour)
+                    x1 = commandAndOptionsEntered[1];
+                    y1 = commandAndOptionsEntered[2];
+                    String colour = commandAndOptionsEntered[3];
+
+                    drawer.fillArea(x1, y1, colour);
                     break;
                 case 'Q':
                     isQuitting = true;
