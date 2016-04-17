@@ -49,6 +49,12 @@ public class Menu {
                     break;
                 case 'L':
                     // drawLine(x1, y1, x2, y2)
+                    String x1 = commandAndOptionsEntered[1];
+                    String y1 = commandAndOptionsEntered[2];
+                    String x2 = commandAndOptionsEntered[3];
+                    String y2 = commandAndOptionsEntered[4];
+
+                    drawer.drawLine(x1, y1, x2, y2);
                     break;
                 case 'R':
                     // drawRectangle(x1, y1, x2, y2)
