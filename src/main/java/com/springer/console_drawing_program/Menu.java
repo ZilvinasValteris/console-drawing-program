@@ -14,22 +14,27 @@ public class Menu {
     {
         boolean isQuitting = false;
         Scanner inputScanner = new Scanner(System.in);
+
+        String x1;
+        String y1;
+        String x2;
+        String y2;
+
         while(!isQuitting){
 
-//        TODO: There should be some sort of menu/manual on how to use this program and what commands are available
             System.out.println("Enter command: ");
             String commandEntered = inputScanner.nextLine();
-
-//        TODO: is there some nicer way/better practice than splitting things on a space? The code will be a bit brittle now (what if user enters 2 spaces?)
             String[] commandAndOptionsEntered = commandEntered.split(" ");
+            char command = 'X';
 
-            char command = commandAndOptionsEntered[0].charAt(0);
-
-            String x1;
-            String y1;
-            String x2;
-            String y2;
-//        char command = commandEntered.charAt(0); // should give the same result as the line above?
+            try
+            {
+                command = commandAndOptionsEntered[0].charAt(0);
+            }
+            catch (StringIndexOutOfBoundsException e)
+            {
+                // Swallowing exception on an empty use input
+            }
 
             switch(command)
             {
@@ -96,10 +101,14 @@ public class Menu {
                     String colour = commandAndOptionsEntered[3];
 
                     drawer.fillArea(x1, y1, colour);
+                    drawer.printDrawing();
                     break;
                 case 'Q':
                     isQuitting = true;
                     System.out.println("Quitting drawing program...");
+                    break;
+                case 'X':
+                    // Empty command to handle user hitting "Enter" before anything is entered
                     break;
                 default:
                     System.out.printf("Command %c does not exist. Please enter a valid command.", command);
