@@ -9,10 +9,9 @@ public class Drawer {
     private int frameHeight;
     private int frameWidth;
 
-    // shall there be a limit on the dimensions of the canvas?
-    // what if height of 0 or 1 or 2 is entered?
-    public void drawCanvas(String width, String height) {
-
+    // TODO: can I have any of these methods testable if I don't return drawing? If I don't return drawing I will end up trying to assert on a private var...
+    public List<String> drawCanvas(String width, String height)
+    {
         try
         {
             frameWidth = Integer.parseInt(width) + 2;
@@ -50,7 +49,7 @@ public class Drawer {
         {
             System.out.println("Invalid input. Function arguments should only be natural numbers, e.g.: C 5 2");
         }
-
+        return drawing;
     }
 
     public void drawLine(String x1, String y1, String x2, String y2)
@@ -60,64 +59,83 @@ public class Drawer {
         int y1Int;
         int y2Int;
 
-        try
+        if(!(drawing == null))
         {
-            x1Int = Integer.parseInt(x1);
-            x2Int = Integer.parseInt(x2);
-            y1Int = Integer.parseInt(y1);
-            y2Int = Integer.parseInt(y2);
-
-            if (x1Int == x2Int)
+            try
             {
-                // Vertical line
-                for (int i = y1Int; i <= y2Int; i++)
+                x1Int = Integer.parseInt(x1);
+                x2Int = Integer.parseInt(x2);
+                y1Int = Integer.parseInt(y1);
+                y2Int = Integer.parseInt(y2);
+
+                if((x2Int < (frameWidth - 1)) && (y2Int < (frameHeight - 1))) {
+
+
+                    if (x1Int == x2Int) {
+                        // Vertical line
+                        for (int i = y1Int; i <= y2Int; i++) {
+                            drawing.remove((i * frameWidth) + x1Int);
+                            drawing.add((i * frameWidth) + x1Int, "x");
+                        }
+                    } else if (y1Int == y2Int) {
+                        // Horizontal line
+
+                        for (int i = x1Int; i <= x2Int; i++) {
+                            drawing.remove((y1Int * frameWidth) + i);
+                            drawing.add((y1Int * frameWidth) + i, "x");
+                        }
+                    } else {
+                        System.out.printf("Only straight lines can be drawn. Coordinates %d %d %d %d would not yield a straight line.",
+                                            x1Int, y1Int, x2Int, y2Int);
+                        System.out.println();
+                    }
+                }
+                else
                 {
-                    drawing.remove((i * frameWidth) + x1Int);
-                    drawing.add((i * frameWidth) + x1Int, "x");
+                    System.out.printf("Lines can not exit the canvas! Please enter coordinates within the current canvas. Current canvas: C %d %d",
+                                        frameWidth - 2, frameHeight - 2);
+                    System.out.println();
                 }
             }
-            else if (y1Int == y2Int)
+            catch (NumberFormatException e)
             {
-                // Horizontal line
-
-                for (int i = x1Int; i <= x2Int; i++)
-                {
-                    drawing.remove((y1Int * frameWidth) + i);
-                    drawing.add((y1Int * frameWidth) + i, "x");
-                }
+                System.out.println("Invalid input. Function arguments should only be natural numbers, e.g.: C 5 2");
             }
-            else
-            {
-                System.out.printf("Only straight lines can be drawn. Coordinates %d %d %d %d would not yield a straight line.", x1Int, y1Int, x2Int, y2Int);
-                System.out.println();
-            }
-
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("Invalid input. Function arguments should only be natural numbers, e.g.: C 5 2");
         }
     }
 
 
     public void drawRectangle(String x1, String y1, String x2, String y2)
     {
-        drawLine(x1, y1, x2, y1);
-        drawLine(x1, y2, x2, y2);
-        drawLine(x1, y1, x1, y2);
-        drawLine(x2, y1, x2, y2);
-
+        if(!(drawing == null))
+        {
+            if(x1.equals(x2) || y1.equals(y2))
+            {
+                System.out.println("The coordinates you have entered represent a line rather than a rectangle!");
+                System.out.println("Please enter the coordinates of the top left corner and the bottom right corner.");
+            }
+            else
+            {
+                drawLine(x1, y1, x2, y1);
+                drawLine(x1, y2, x2, y2);
+                drawLine(x1, y1, x1, y2);
+                drawLine(x2, y1, x2, y2);
+            }
+        }
     }
 
     public void fillArea(String x, String y, String colour)
     {
-
+        if(!(drawing == null))
+        {
+            // fill in
+        }
     }
 
 
     public void printDrawing()
     {
-        if(drawing.isEmpty())
+        if(drawing == null)
         {
             System.out.println("No canvas exists. You need to create a canvas first. Use the command: C width length");
         }

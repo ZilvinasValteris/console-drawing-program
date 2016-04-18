@@ -31,8 +31,6 @@ public class Menu {
             String y2;
 //        char command = commandEntered.charAt(0); // should give the same result as the line above?
 
-            // What should the behaviour be if something is already drawn at the coordinates specified?
-            // TODO: need to ensure that canvas is drawn before any other commands are used
             switch(command)
             {
                 case 'C':
@@ -54,7 +52,6 @@ public class Menu {
 
                     break;
                 case 'L':
-                    // TODO: ensure that the line is withing the bounds of the canvas before drawing it
                     if(commandAndOptionsEntered.length == 5)
                     {
                         x1 = commandAndOptionsEntered[1];
@@ -75,7 +72,6 @@ public class Menu {
                     }
                     break;
                 case 'R':
-                    // TODO: need to check that the coordinates entered represent a rectangular
                     if(commandAndOptionsEntered.length == 5) {
                         x1 = commandAndOptionsEntered[1];
                         y1 = commandAndOptionsEntered[2];
